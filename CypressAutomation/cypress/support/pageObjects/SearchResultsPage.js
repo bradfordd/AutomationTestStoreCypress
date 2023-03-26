@@ -17,4 +17,10 @@ export class SearchResultsPage {
       return $productTitles.length;
     });
   }
+  static getNthProductLink(n) {
+    return SearchResultsPage.getProductTitleLinks().eq(n);
+  }
+  static getNthProductTitle(n) {
+    return SearchResultsPage.getNthProductLink(n).invoke("text");
+  }
 }
