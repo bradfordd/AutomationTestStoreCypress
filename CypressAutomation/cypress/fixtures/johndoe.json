@@ -1,0 +1,19 @@
+{
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john.doe@example.com",
+        "telephone": "1234567890",
+        "fax": "0987654321",
+        "company": "Example Corp.",
+        "address1": "123 Main Street",
+        "address2": "Apt. 4B",
+        "city": "Anytown",
+        "zipcode": "12345",
+        "country": "United States",
+        "region": "California",
+        "loginname" : "JohnDoeLikesShopping",
+        "password": "SecurePassword123",
+        "confirmPassword": "SecurePassword123",
+        "newsletter": "true"
+}
+      

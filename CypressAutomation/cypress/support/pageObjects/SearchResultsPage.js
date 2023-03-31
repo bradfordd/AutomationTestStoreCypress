@@ -23,4 +23,7 @@ export class SearchResultsPage {
   static getNthProductTitle(n) {
     return SearchResultsPage.getNthProductLink(n).invoke("text");
   }
+  static clickOnNthProduct(n) {
+    SearchResultsPage.getProductTitleLinks().eq(n).click();
+  }
 }
