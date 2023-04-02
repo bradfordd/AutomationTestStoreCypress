@@ -1,81 +1,61 @@
 ;FFMETADATA1
 [CHAPTER]
 TIMEBASE=1/1000
-START=-12274
-END=12203
+START=14602
+END=29067
 title=Search for a Item and selects an item they want Searching for item and navigating to item Product Details Page (example #1)
 [CHAPTER]
 TIMEBASE=1/1000
-START=9637
-END=36879
+START=31396
+END=43560
 title=Search for a Item and selects an item they want Searching for item and navigating to item Product Details Page (example #2)
 [CHAPTER]
 TIMEBASE=1/1000
-START=50517
-END=64188
+START=46192
+END=55774
 title=Search for a Item and selects an item they want Searching for item and navigating to item Product Details Page (example #3)
 [CHAPTER]
 TIMEBASE=1/1000
-START=57064
-END=77893
+START=56870
+END=65383
 title=Search for a Item and selects an item they want Searching for item and navigating to item Product Details Page (example #4)
 [CHAPTER]
 TIMEBASE=1/1000
-START=86583
-END=98770
+START=59912
+END=73926
 title=Search for a Item and selects an item they want Searching for item and navigating to item Product Details Page (example #5)
 [CHAPTER]
 TIMEBASE=1/1000
-START=101142
-END=110991
+START=79518
+END=87965
 title=Search for a Item and selects an item they want Searching for item and navigating to item Product Details Page (example #6)
 [CHAPTER]
 TIMEBASE=1/1000
-START=110853
-END=120868
+START=85547
+END=96462
 title=Search for a Item and selects an item they want Searching for item and navigating to item Product Details Page (example #7)
 [CHAPTER]
 TIMEBASE=1/1000
-START=117901
-END=130915
+START=96578
+END=107420
 title=Search for a Item and selects an item they want Searching for item and navigating to item Product Details Page (example #8)
 [CHAPTER]
 TIMEBASE=1/1000
-START=130391
-END=143961
+START=99735
+END=118292
 title=Search for a Item and selects an item they want User searches for item, adds item to cart, then checks out (example #1)
 [CHAPTER]
 TIMEBASE=1/1000
-START=145902
-END=157560
+START=117208
+END=136897
 title=Search for a Item and selects an item they want User searches for item, adds item to cart, then checks out (example #2)
 [CHAPTER]
 TIMEBASE=1/1000
-START=160365
-END=169248
+START=135637
+END=156623
 title=Search for a Item and selects an item they want User searches for item, adds item to cart, then checks out (example #3)
 [CHAPTER]
 TIMEBASE=1/1000
-START=166169
-END=178169
+START=156185
+END=177709
 title=Search for a Item and selects an item they want User searches for item, adds item to cart, then checks out (example #4)
-[CHAPTER]
-TIMEBASE=1/1000
-START=181838
-END=190194
-title=Search for a Item and selects an item they want User searches for item, adds item to cart, then checks out (example #5)
-[CHAPTER]
-TIMEBASE=1/1000
-START=189109
-END=198585
-title=Search for a Item and selects an item they want User searches for item, adds item to cart, then checks out (example #6)
-[CHAPTER]
-TIMEBASE=1/1000
-START=197976
-END=208080
-title=Search for a Item and selects an item they want User searches for item, adds item to cart, then checks out (example #7)
-[CHAPTER]
-TIMEBASE=1/1000
-START=205951
-END=218214
-title=Search for a Item and selects an item they want User searches for item, adds item to cart, then checks out (example #8)

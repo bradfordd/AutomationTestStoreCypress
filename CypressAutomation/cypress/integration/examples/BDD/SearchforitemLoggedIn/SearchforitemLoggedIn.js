@@ -6,6 +6,9 @@ import { ProductDetailsPage } from "../../../../support/pageObjects/ProductDetai
 import { LoginOrRegisterButton } from "../../../../support/pageObjects/LoginOrRegisterButton";
 import { LoginPage } from "../../../../support/pageObjects/LoginPage";
 import { ProductSpecifications } from "../../../../support/pageObjects/ProductSpecifications";
+import { ShoppingCartPage } from "../../../../support/pageObjects/shoppingCartPage";
+import { CheckoutConfirmation } from "../../../../support/pageObjects/CheckoutConfirmation";
+import { OrderProcessConfirmationPage } from "../../../../support/pageObjects/OrderProcessConfirmationPage";
 
 var currProductTitle = "";
 Given("User Searches For {string}", function (item) {
@@ -39,6 +42,7 @@ Given(
 Given(
   "User makes purchase specifications if necessary, adds item to cart and proceeds to checkout",
   function (item) {
+    ProductDetailsPage.itemIsOutOfStock();
     let hasSelection = false;
     ProductSpecifications.hasSelections().then((hasSelection) => {
       if (hasSelection) {
@@ -49,28 +53,13 @@ Given(
         });
         ProductSpecifications.hasDropdownMenu().then((hasDropdownMenu) => {
           if (hasDropdownMenu) {
-            ProductSpecifications.getNumberOfDropdownMenuOptions().then(
-              (numberOfDropdownOptions) => {
-                for (let i = 0; i < numberOfDropdownOptions; i++) {
-                  ProductSpecifications.getNthDropdownMenuOptionText(i).then(
-                    (menuOptionText) => {
-                      if (
-                        !ProductSpecifications.containsOutOfStock(
-                          menuOptionText
-                        )
-                      ) {
-                        ProductSpecifications.selectNthDropdownMenuOption(i);
-                      }
-                    }
-                  );
-                }
-              }
-            );
-            ProductSpecifications.selectNthDropdownMenuOption(1);
+            ProductSpecifications.selectFirstAvailableDropdownOption();
           }
         });
       }
     });
+    ProductDetailsPage.clickAddToCartButton();
+    ShoppingCartPage.clickCheckoutPath();
   }
 );
 
@@ -96,9 +85,6 @@ Then(
 );
 
 Then("Checkout confirmation page displays", () => {
-  // ProductDetailsPage.getProductName()
-  //   .invoke("text")
-  //   .then((productName) => {
-  //     expect(productName).to.equal(currProductTitle);
-  //   });
+  CheckoutConfirmation.clickConfirmOrderButton();
+  OrderProcessConfirmationPage.clickContinueButton();
 });

@@ -6,7 +6,7 @@ export class RadioButtonSelectionSet {
     return cy.get(this.radioButtonsGroupPath);
   }
 
-  static hasSelections() {
+  static hasRadioButtons() {
     return cy
       .get(RadioButtonSelectionSet.specificationsRadioPath)
       .then((specificationElements) => {

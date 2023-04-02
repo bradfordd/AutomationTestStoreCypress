@@ -31,9 +31,6 @@ Examples:
     |  item      |
     | perfume |
     | heel |
-    | body |
-    | Makeup |
-    | Gift Sets |
     | Shampoo |
     | Conditioner |
-    | Mascara |
+  

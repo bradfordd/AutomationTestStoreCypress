@@ -84,6 +84,28 @@ export class ProductSpecifications {
     cy.get(ProductSpecifications.specificationsDropdownPath).select(n);
   }
 
+  static selectFirstAvailableDropdownOption() {
+    ProductSpecifications.getNumberOfDropdownMenuOptions().then(
+      (numberOfDropdownOptions) => {
+        const findAvailableOption = (index) => {
+          if (index < numberOfDropdownOptions) {
+            ProductSpecifications.getNthDropdownMenuOptionText(index).then(
+              (menuOptionText) => {
+                if (!ProductSpecifications.containsOutOfStock(menuOptionText)) {
+                  ProductSpecifications.selectNthDropdownMenuOption(index);
+                } else {
+                  findAvailableOption(index + 1);
+                }
+              }
+            );
+          }
+        };
+
+        findAvailableOption(0);
+      }
+    );
+  }
+
   static containsOutOfStock(optionText) {
     return optionText.includes("Out of Stock");
   }
