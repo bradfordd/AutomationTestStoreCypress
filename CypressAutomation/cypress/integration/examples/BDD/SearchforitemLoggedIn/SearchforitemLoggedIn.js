@@ -42,7 +42,6 @@ Given(
 Given(
   "User makes purchase specifications if necessary, adds item to cart and proceeds to checkout",
   function (item) {
-    ProductDetailsPage.itemIsOutOfStock();
     let hasSelection = false;
     ProductSpecifications.hasSelections().then((hasSelection) => {
       if (hasSelection) {
