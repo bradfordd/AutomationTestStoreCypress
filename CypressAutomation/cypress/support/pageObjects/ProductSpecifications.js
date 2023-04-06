@@ -100,7 +100,6 @@ export class ProductSpecifications {
             );
           }
         };
-
         findAvailableOption(0);
       }
     );

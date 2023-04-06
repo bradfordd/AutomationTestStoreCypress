@@ -2,7 +2,15 @@ export class AccountDashboard {
   static alertPath = ".alert";
   static editAccountDetailsPath =
     '[data-original-title="Edit account details"]';
+  static manageAddressBookPath =
+    '.btn[data-original-title="Manage Address Book"]';
 
+  static getManageAddressBookButton() {
+    return cy.get(AccountDashboard.manageAddressBookPath);
+  }
+  static clickManageAddressBookButton() {
+    AccountDashboard.getManageAddressBookButton().click();
+  }
   static getAlert() {
     return cy.get(AccountDashboard.alertPath);
   }

@@ -1,0 +1,346 @@
+{
+"addresses": [
+  {
+    "street": "123 Greenway Terrace",
+    "city": "Mapleton",
+    "state": "NY",
+    "zip": "12567"
+  },
+  {
+    "street": "456 Oakbrook Drive",
+    "city": "Southport",
+    "state": "CA",
+    "zip": "90002"
+  },
+  {
+    "street": "789 Serenity Lane",
+    "city": "Millvale",
+    "state": "PA",
+    "zip": "15209"
+  },
+  {
+    "street": "2101 Summit View Road",
+    "city": "Pleasant Grove",
+    "state": "UT",
+    "zip": "84062"
+  },
+  {
+    "street": "3223 Maplewood Court",
+    "city": "Briarwood",
+    "state": "IL",
+    "zip": "60421"
+  },
+  {
+    "street": "5642 Willowbrook Lane",
+    "city": "Springfield",
+    "state": "OH",
+    "zip": "45502"
+  },
+  {
+    "street": "8754 Riverside Drive",
+    "city": "Harmony",
+    "state": "TX",
+    "zip": "78744"
+  },
+  {
+    "street": "9809 Elmwood Avenue",
+    "city": "Eastwood",
+    "state": "MI",
+    "zip": "48601"
+  },
+  {
+    "street": "1102 Pine Ridge Way",
+    "city": "Valley Park",
+    "state": "GA",
+    "zip": "30143"
+  },
+  {
+    "street": "1254 Brookside Drive",
+    "city": "Meadowbrook",
+    "state": "NJ",
+    "zip": "07480"
+  },
+  {
+    "street": "1378 Lakeview Circle",
+    "city": "Northgate",
+    "state": "WA",
+    "zip": "98125"
+  },
+  {
+    "street": "1550 Aspen Way",
+    "city": "Willow Glen",
+    "state": "IN",
+    "zip": "46214"
+  },
+  {
+    "street": "1669 Redwood Court",
+    "city": "Lakeshore",
+    "state": "OR",
+    "zip": "97045"
+  },
+  {
+    "street": "1785 Cedarwood Lane",
+    "city": "Ridgewood",
+    "state": "VA",
+    "zip": "22192"
+  },
+  {
+    "street": "1915 Oakwood Terrace",
+    "city": "Sunnyvale",
+    "state": "FL",
+    "zip": "33062"
+  },
+  {
+    "street": "2062 Mountain View Drive",
+    "city": "Crestwood",
+    "state": "AZ",
+    "zip": "85718"
+  },
+  {
+    "street": "2179 Birchwood Avenue",
+    "city": "Woodland",
+    "state": "MN",
+    "zip": "55318"
+  },
+  {
+    "street": "2310 Forest Hill Road",
+    "city": "Shady Grove",
+    "state": "AL",
+    "zip": "35242"
+  },
+  {
+    "street": "2499 Brookdale Lane",
+    "city": "Spring Hill",
+    "state": "TN",
+    "zip": "37174"
+  },
+  {
+        "street": "2623 Sunset Drive",
+        "city": "Oakmont",
+        "state": "CT",
+        "zip": "06460"
+        },
+      {
+        "street": "2755 Highland View Drive",
+        "city": "Cedar Ridge",
+        "state": "KS",
+        "zip": "67212"
+      },
+      {
+        "street": "2868 Evergreen Lane",
+        "city": "Westbrook",
+        "state": "NC",
+        "zip": "28311"
+      },
+      {
+        "street": "3012 Parkview Drive",
+        "city": "Forest Hills",
+        "state": "MA",
+        "zip": "01876"
+      },
+      {
+        "street": "3145 Meadowbrook Lane",
+        "city": "River Oaks",
+        "state": "MO",
+        "zip": "64082"
+      },
+      {
+        "street": "3289 Hillcrest Drive",
+        "city": "Sunset Ridge",
+        "state": "WI",
+        "zip": "53202"
+      },
+      {
+        "street": "3456 Oakwood Court",
+        "city": "Cherry Hill",
+        "state": "SC",
+        "zip": "29576"
+      },
+      {
+        "street": "3598 Elmwood Drive",
+        "city": "Rosewood",
+        "state": "IA",
+        "zip": "50401"
+      },
+      {
+        "street": "3721 Pinecrest Lane",
+        "city": "Hillside",
+        "state": "CO",
+        "zip": "80904"
+      },
+      {
+        "street": "3835 Woodland Avenue",
+        "city": "Green Valley",
+        "state": "KY",
+        "zip": "40514"
+      },
+      {
+        "street": "3978 Park Lane",
+        "city": "Riverside",
+        "state": "AR",
+        "zip": "72712"
+      },
+      {
+        "street": "4100 Aspen Court",
+        "city": "Silver Creek",
+        "state": "ID",
+        "zip": "83340"
+      },
+      {
+        "street": "4256 Cedar Lane",
+        "city": "Woodbridge",
+        "state": "NH",
+        "zip": "03103"
+      },
+      {
+        "street": "4370 Oak Street",
+        "city": "Clearview",
+        "state": "VT",
+        "zip": "05401"
+      },
+      {
+        "street": "4521 Willow Lane",
+        "city": "Lakeview",
+        "state": "NV",
+        "zip": "89108"
+      },
+      {
+        "street": "4665 Forest Drive",
+        "city": "Green Meadows",
+        "state": "MT",
+        "zip": "59601"
+      },
+      {
+        "street": "4780 Meadow Lane",
+        "city": "Cedar Grove",
+        "state": "ND",
+        "zip": "58504"
+      },
+      {
+        "street": "4901 Hillside Drive",
+        "city": "Willowbrook",
+        "state": "WY",
+        "zip": "82001"
+      },
+      {
+        "street": "5038 Birch Street",
+        "city": "Fairview",
+        "state": "RI",
+        "zip": "02888"
+      },
+      {
+        "street": "5302 Maple Avenue",
+        "city": "Glenview",
+        "state": "WV",
+        "zip": "25304"
+      },
+      {
+        "street": "5443 Elmwood Court",
+        "city": "Woodland Hills",
+        "state": "NE",
+        "zip": "68114"
+      },
+      {
+        "street": "5578 Oakwood Drive",
+        "city": "Cedar Park",
+        "state": "MS",
+        "zip": "39157"
+      },
+      {
+        "street": "5734 Forest View Drive",
+        "city": "Sunrise",
+        "state": "OK",
+        "zip": "73120"
+      },
+      {
+        "street": "5850 Mountain Road",
+        "city": "Riverdale",
+        "state": "LA",
+        "zip": "70119"
+      },
+      {
+        "street": "5999 Lakeview Court",
+        "city": "Bridgewood",
+        "state": "NM",
+        "zip": "87109"
+      },
+      {
+        "street": "6142 Pine Tree Lane",
+        "city": "Cypress",
+        "state": "SD",
+        "zip": "57701"
+      },
+      {
+        "street": "6260 Cedarwood Court",
+        "city": "Hillcrest",
+        "state": "HI",
+        "zip": "96813"
+      },
+      {
+        "street": "6408 Forest Hill Terrace",
+        "city": "Greenwood",
+        "state": "AK",
+        "zip": "99501"
+      },
+      {
+        "street": "6525 Elmwood Road",
+        "city": "Oakridge",
+        "state": "DE",
+        "zip": "19803"
+      },
+      {
+        "street": "6673 Oakbrook Lane",
+        "city": "Silver Springs",
+        "state": "MD",
+        "zip": "20904"
+      },
+      {
+        "street": "6792 Serenity Circle",
+        "city": "Meadow Hills",
+        "state": "DC",
+        "zip": "20001"
+      },
+      {
+        "street": "6937 Sunset Ridge",
+        "city": "Valley View",
+        "state": "UT",
+        "zip": "84401"
+      },
+      {
+        "street": "7080 Highland Drive",
+        "city": "Willow Springs",
+        "state": "VT",
+        "zip": "05641"
+      },
+      {
+        "street": "7221 Brookside Road",
+        "city": "Cedarwood",
+        "state": "CT",
+        "zip": "06830"
+      },
+      {
+        "street": "7360 Parkview Lane",
+        "city": "Ridgeway",
+        "state": "PA",
+        "zip": "19348"
+      },
+      {
+        "street": "7503 Aspen Grove",
+        "city": "Lakeside",
+        "state": "MN",
+        "zip": "55401"
+      },
+      {
+        "street": "7634 Oakwood Avenue",
+        "city": "Westbury",
+        "state": "NY",
+        "zip": "11590"
+      },
+      {
+        "street": "7765 Meadowlark Drive",
+        "city": "Maplewood",
+        "state": "MA",
+        "zip": "02148"
+      }    
+]
+}

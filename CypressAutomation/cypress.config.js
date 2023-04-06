@@ -17,7 +17,7 @@ module.exports = defineConfig({
     url: "https://rahulshettyacademy.com",
   },
   retries: {
-    runMode: 1,
+    runMode: 0,
   },
   projectId: "nodpcq",
 
