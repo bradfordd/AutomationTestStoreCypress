@@ -4,6 +4,14 @@ export class AccountDashboard {
     '[data-original-title="Edit account details"]';
   static manageAddressBookPath =
     '.btn[data-original-title="Manage Address Book"]';
+  static myWishlistPath = "[data-original-title='My wish list']";
+
+  static getMyWishlist() {
+    return cy.get(this.myWishlistPath);
+  }
+  static clickMyWishlist() {
+    this.getMyWishlist().click();
+  }
 
   static getManageAddressBookButton() {
     return cy.get(AccountDashboard.manageAddressBookPath);

@@ -5,5 +5,3 @@ export class HomePage {
     cy.visit(HomePage.homePageUrl);
   }
 }
-
-//export default HomePage;
