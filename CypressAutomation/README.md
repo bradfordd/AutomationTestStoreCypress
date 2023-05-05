@@ -40,13 +40,19 @@ Before getting started, please ensure you have the following software installed 
 To run the tests in the interactive Test Runner mode, use the following command:
 
 ```
-npm run cy:open
+npm run test
 ```
 
 To run the tests in headless mode, use the following command:
 
 ```
-npm run cy:run
+npm run headTest
+```
+
+To run a specified feature file, use the following command:
+
+```
+node_modules/.bin/cypress run test --spec 'cypress\integration\examples\BDD\FeatureFileName.feature' --headed --no-exit
 ```
 
 ## Test Structure
