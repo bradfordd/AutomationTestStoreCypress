@@ -1,37 +1,71 @@
-AutomationTestStoreCypress
-This repository contains a test suite for the Automation Test Store application, using the Cypress testing framework with Cucumber BDD. The test suite aims to provide comprehensive end-to-end testing for the application, ensuring that all functionalities work as expected.
+# Automation Test Store Cypress
 
-Table of Contents
-Getting Started
-Running Tests
-Test Structure
-Contributing
-License
-Getting Started
-To set up the project locally, follow these steps:
+This repository contains a Cypress test automation suite for the Automation Test Store, demonstrating end-to-end testing capabilities using the Cypress framework.
 
-Clone the repository:
-bash
-Copy code
-git clone https://github.com/bradfordd/AutomationTestStoreCypress.git
-Navigate to the project directory:
-bash
-Copy code
-cd AutomationTestStoreCypress
-Install the dependencies:
-bash
-Copy code
-npm install
+## Table of Contents
 
-Running Tests
-To run the test suite, execute the following command:
+1. [Prerequisites](#prerequisites)
+2. [Installation](#installation)
+3. [Running Tests](#running-tests)
+4. [Test Structure](#test-structure)
+5. [Contributing](#contributing)
+6. [License](#license)
 
-bash
-Copy code
-npm run test
+## Prerequisites
 
-To run headed test
-npm run headTest
+Before getting started, please ensure you have the following software installed on your local machine:
 
-To run chrome test
-npm run chromeTeset
+- [Node.js](https://nodejs.org/en/download/) (LTS version recommended)
+- [Git](https://git-scm.com/downloads)
+
+## Installation
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/bradfordd/AutomationTestStoreCypress.git
+   ```
+
+2. Navigate to the `CypressAutomation` directory:
+   ```
+   cd AutomationTestStoreCypress/CypressAutomation
+   ```
+
+3. Install the required dependencies:
+   ```
+   npm install
+   ```
+
+## Running Tests
+
+To run the tests in the interactive Test Runner mode, use the following command:
+
+```
+npm run cy:open
+```
+
+To run the tests in headless mode, use the following command:
+
+```
+npm run cy:run
+```
+
+## Test Structure
+
+The tests are organized into the following directories:
+
+- `fixtures`: Contains data files used for test inputs, such as users and products.
+- `integration`: Contains the actual test files.
+  - `test_store`: Contains test cases for the Automation Test Store.
+- `plugins`: Contains the Cypress plugins.
+- `support`: Contains custom commands and other helper functions.
+
+## Contributing
+
+1. Fork the repository and create a new branch for your feature or bug fix.
+2. Develop your changes and write appropriate tests.
+3. Ensure all tests pass by running `npm run cy:run`.
+4. Commit your changes and submit a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
