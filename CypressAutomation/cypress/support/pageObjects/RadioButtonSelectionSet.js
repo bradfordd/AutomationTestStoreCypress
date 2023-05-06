@@ -13,18 +13,4 @@ export class RadioButtonSelectionSet {
         return specificationElements.length > 0;
       });
   }
-
-  static getNthRadioButton(n) {}
-
-  //   static selectRadioButtonByValue(value) {
-  //     this.getRadioButtonsGroup().check(value);
-  //   }
-
-  //   static selectNthRadioButton(n) {
-  //     this.getRadioButtonsGroup().eq(n).check();
-  //   }
-
-  //   static getSelectedRadioButton() {
-  //     return this.getRadioButtonsGroup().filter(":checked");
-  //   }
 }
