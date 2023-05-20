@@ -1,5 +1,6 @@
 export class AccountDashboard {
   static alertPath = ".alert";
+
   static editAccountDetailsPath =
     '[data-original-title="Edit account details"]';
   static manageAddressBookPath =

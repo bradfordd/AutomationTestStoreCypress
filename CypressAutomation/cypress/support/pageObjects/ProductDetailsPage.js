@@ -10,6 +10,120 @@ export class ProductDetailsPage {
   static addToWishListPath = "a.wishlist_add";
   static removeFromWishListPath = "a.wishlist_remove";
   static productInfoPath = ".productinfo li";
+  static productSpecifications = ".col-sm-10";
+
+  static getSelectedSpecifications() {
+    let selectedElementsArray = [];
+    return cy
+      .get(this.productSpecifications)
+      .each(($el, index, $list) => {
+        // Convert the Cypress object to a jQuery object
+        let $jqueryEl = Cypress.$($el);
+
+        if ($jqueryEl.find("input[type=radio]").length) {
+          return this.getRadioButtonSelectedElement($jqueryEl).then(
+            (radioVal) => {
+              selectedElementsArray.push(radioVal);
+            }
+          );
+        } else if ($jqueryEl.find("select").length) {
+          return this.getDropdownSelectedElement($jqueryEl).then(
+            (dropdownVal) => {
+              selectedElementsArray.push(dropdownVal);
+            }
+          );
+        }
+      })
+      .then(() => {
+        // Use the array here, after all async tasks are done.
+        return cy.wrap(selectedElementsArray);
+      });
+  }
+
+  // Helper function to check if radio button is disabled
+  static checkIfRadioButtonIsDisabled($radioButton) {
+    cy.wrap($radioButton).then(($rb) => {
+      if ($rb.attr("disabled") !== undefined) {
+        throw new Error(
+          "Could not make selection due to radio button being disabled"
+        );
+      } else {
+        cy.wrap($rb).click(); // Clicks the radio button if it is not disabled
+      }
+    });
+  }
+
+  // Helper function to get radio button and check if it's disabled
+  static getRadioButtonAndCheckIfDisabled(id) {
+    cy.get(`input[id="${id}"]`).then(($radioButton) => {
+      this.checkIfRadioButtonIsDisabled($radioButton);
+    });
+  }
+
+  // Helper function to check if text includes spec and get radio button
+  static checkSpecAndFetchRadioButton($label, spec) {
+    cy.wrap($label)
+      .invoke("text")
+      .then((text) => {
+        text = text.trim(); // Trim the text to remove any whitespace
+
+        // Compare the text with the value from specs array
+        if (text.includes(spec)) {
+          // If a match is found, fetch 'for' attribute which is equal to id of the radio button
+          cy.wrap($label)
+            .invoke("attr", "for")
+            .then((id) => this.getRadioButtonAndCheckIfDisabled(id));
+        }
+      });
+  }
+
+  // The main function
+  static makeSpecifications(specs) {
+    cy.get(this.productSpecifications)
+      .should("have.length", specs.length)
+      .each(($el, index) => {
+        if ($el.find("input[type=radio]").length) {
+          // Find the associated label
+          cy.wrap($el)
+            .find("label")
+            .each(($label) => {
+              this.checkSpecAndFetchRadioButton($label, specs[index]);
+            });
+        }
+      });
+  }
+
+  static getRadioButtonSelectedElement($jqueryEl) {
+    return cy.wrap($jqueryEl).then(($wrappedEl) => {
+      const radioValue = $wrappedEl.find('input[type="radio"]:checked').val();
+      return radioValue || "No Selection Made"; // return the value or an empty string if the value is undefined
+    });
+  }
+
+  static getDropdownSelectedElement($jqueryEl) {
+    return cy.wrap($jqueryEl).then(($wrappedEl) => {
+      const selectedOption = $wrappedEl.find("select option:selected").text();
+      return selectedOption || "No Selection Made"; // return the selected option to continue the chain
+    });
+  }
+
+  static logElementHTML(jqueryElement) {
+    let outerHTML = jqueryElement[0].outerHTML;
+    console.log(outerHTML);
+  }
+
+  static areSpecificationsPresent() {
+    return cy.document().then((doc) => {
+      const specificationElements = doc.querySelectorAll(
+        this.productSpecifications
+      );
+      return cy.wrap(specificationElements.length > 0);
+    });
+  }
+
+  static getSpecificationSelectors() {
+    return cy.get(this.productSpecifications);
+  }
 
   static getProductInfo() {
     return cy.get(this.productInfoPath);
@@ -81,9 +195,6 @@ export class ProductDetailsPage {
       if (isDisplayed) {
         cy.get("a.wishlist_add").click();
       }
-      // else {
-      //   throw new Error("Add To Wish List button is not displayed");
-      // }
     });
   }
 

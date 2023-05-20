@@ -7,7 +7,6 @@ import { AccountDashboard } from "../pageObjects/AccountDashboard";
 import { AddressBook } from "../pageObjects/AddressBook";
 
 export class AddressCleanup {
-  // cypress/support/cleanup.js
   static cleanupAddresses() {
     cy.clearCookies();
     HomePage.visitHomePage();

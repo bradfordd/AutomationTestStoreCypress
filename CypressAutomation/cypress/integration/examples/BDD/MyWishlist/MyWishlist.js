@@ -1,4 +1,9 @@
-import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+import {
+  Given,
+  When,
+  Then,
+  After,
+} from "@badeball/cypress-cucumber-preprocessor";
 import { HomePage } from "../../../../support/pageObjects/HomePage";
 import { SearchBar } from "../../../../support/pageObjects/SearchBar";
 import { SearchResultsPage } from "../../../../support/pageObjects/SearchResultsPage";
@@ -11,9 +16,12 @@ import { CheckoutConfirmation } from "../../../../support/pageObjects/CheckoutCo
 import { OrderProcessConfirmationPage } from "../../../../support/pageObjects/OrderProcessConfirmationPage";
 import { Navbar } from "../../../../support/pageObjects/Navbar";
 import { AccountDashboard } from "../../../../support/pageObjects/AccountDashboard";
-import { MyWishList } from "../../../../support/pageObjects/MyWishList";
+import { MyWishList } from "../../../../support/pageObjects/MyWishListPOM";
+import { WishlistCleanup } from "../../../../support/cleanup/WishlistCleanup";
+import { HeaderStrip } from "../../../../support/pageObjects/HeaderStrip";
 
-var modelNumber = "";
+let modelNumber = "";
+let productName = "";
 
 Given("User Navigates to ATS HomePage and is logged in", function () {
   cy.clearCookies();
@@ -22,6 +30,9 @@ Given("User Navigates to ATS HomePage and is logged in", function () {
   cy.fixture("johndoe").then(function (data) {
     this.data = data;
     LoginPage.login(this.data.loginname, this.data.password);
+  });
+  LoginOrRegisterButton.doesBrowserHaveLoggedInCookie().then((result) => {
+    cy.log("After Login: " + result);
   });
 });
 
@@ -37,6 +48,11 @@ When("User Selects an item and adds item to their wishlist", function () {
   ProductDetailsPage.getModelNumber().then((val) => {
     modelNumber = val;
   });
+  ProductDetailsPage.getProductName()
+    .invoke("text")
+    .then((val) => {
+      productName = val;
+    });
 });
 
 When(
@@ -44,21 +60,24 @@ When(
   function () {
     Navbar.clickCustomerMenu();
     AccountDashboard.clickMyWishlist();
-    MyWishList.getNthTableModelCell(4)
-      .invoke("text")
-      .then((cell) => {
-        expect(cell).to.equal(modelNumber);
-      });
-    MyWishList.findGivenModelTableRow(modelNumber).then((n) => {
-      console.log(n);
-    });
   }
 );
 
 Then(
   "User is shown their wishlist with the item they added being present",
   function () {
-    //     Your code to assert that the added item is present in the wishlist
-    //     Wishlist.verifyItemInWishlist(); // You may need to pass the item details as an argument
+    const promises = [
+      MyWishList.wishlistContainsGivenProductModel(modelNumber).then((val) => {
+        expect(val).to.be.true;
+      }),
+      MyWishList.wishlistContainsGivenProductName(name).then((index) => {
+        expect(index).to.be.true;
+      }),
+    ];
+    return Promise.all(promises);
   }
 );
+
+After({ tags: "@Wishlist" }, () => {
+  return WishlistCleanup.cleanupWishlist();
+});

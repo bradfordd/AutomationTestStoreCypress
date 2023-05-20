@@ -6,7 +6,7 @@ import { ProductDetailsPage } from "../../../../support/pageObjects/ProductDetai
 import { LoginOrRegisterButton } from "../../../../support/pageObjects/LoginOrRegisterButton";
 import { LoginPage } from "../../../../support/pageObjects/LoginPage";
 import { ProductSpecifications } from "../../../../support/pageObjects/ProductSpecifications";
-import { ShoppingCartPage } from "../../../../support/pageObjects/shoppingCartPage";
+import { ShoppingCartPage } from "../../../../support/pageObjects/ShoppingCartPage";
 import { CheckoutConfirmation } from "../../../../support/pageObjects/CheckoutConfirmation";
 import { OrderProcessConfirmationPage } from "../../../../support/pageObjects/OrderProcessConfirmationPage";
 

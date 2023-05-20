@@ -1,4 +1,4 @@
-@WebTest
+@WebTest @Wishlist
 Feature: Users have the ability to add items to wishlist and view said wishlist later
   
   Background:
