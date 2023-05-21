@@ -16,22 +16,35 @@ export class ProductDetailsPage {
     let selectedElementsArray = [];
     return cy
       .get(this.productSpecifications)
-      .each(($el, index, $list) => {
+      .each(($specEl, index, $specifications) => {
         // Convert the Cypress object to a jQuery object
-        let $jqueryEl = Cypress.$($el);
-
-        if ($jqueryEl.find("input[type=radio]").length) {
-          return this.getRadioButtonSelectedElement($jqueryEl).then(
-            (radioVal) => {
-              selectedElementsArray.push(radioVal);
-            }
-          );
-        } else if ($jqueryEl.find("select").length) {
-          return this.getDropdownSelectedElement($jqueryEl).then(
-            (dropdownVal) => {
-              selectedElementsArray.push(dropdownVal);
-            }
-          );
+        if ($specEl.find("input[type=radio]").length) {
+          cy.wrap($specEl)
+            .find("input[type='radio']:checked")
+            .each(($currButton, radioIndex, $radioButtons) => {
+              cy.wrap($currButton)
+                .parent("label")
+                .then(($label) => {
+                  const text = $label.text();
+                  cy.log("Element " + radioIndex + ":");
+                  cy.log(text);
+                  selectedElementsArray.push(text);
+                });
+            });
+        } else if ($specEl.find("select").length) {
+          cy.log("DROPDOWN BAR FOUND");
+          cy.wrap($specEl)
+            .find("option[selected]")
+            .each(($selectionMade) => {
+              const text = $selectionMade.text();
+              cy.log("SelectionMade: " + text);
+              selectedElementsArray.push(text);
+            });
+          // return this.getDropdownSelectedElement($jqueryEl).then(
+          //   (dropdownVal) => {
+          //     selectedElementsArray.push(dropdownVal);
+          //   }
+          // );
         }
       })
       .then(() => {

@@ -31,16 +31,23 @@ Given(
   "User Adds multiple items to their cart after searching for {string}",
   function (string) {
     SearchBar.searchForItem(
-      "Womens high heel point toe stiletto sandals ankle strap court shoes"
+      "New Ladies High Wedge Heel Toe Thong Diamante Flip Flop Sandals"
     );
 
-    ProductDetailsPage.getSelectedSpecifications().then(
-      (selectedElementsArray) => {
-        console.log(selectedElementsArray);
-      }
-    );
-    let itemSpecs = ["green"];
+    // ProductDetailsPage.getSelectedSpecifications().then(
+    //   (selectedElementsArray) => {
+    //     console.log(selectedElementsArray);
+    //   }
+    // );
+    let itemSpecs = ["3 UK", "red"];
     ProductDetailsPage.makeSpecifications(itemSpecs);
+    ProductDetailsPage.getSelectedSpecifications().then((selectionsMade) => {
+      cy.log("SELECTIONS MADE: ");
+      for (let i = 0; i < selectionsMade.length; i++) {
+        cy.log("Index " + i + ": " + selectionsMade[i]);
+      }
+      //cy.log("SELECTIONS MADE: " + selectionsMade);
+    });
   }
 );
 
