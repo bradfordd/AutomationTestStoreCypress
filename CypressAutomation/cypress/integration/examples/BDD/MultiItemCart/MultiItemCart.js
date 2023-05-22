@@ -34,20 +34,33 @@ Given(
       "New Ladies High Wedge Heel Toe Thong Diamante Flip Flop Sandals"
     );
 
-    // ProductDetailsPage.getSelectedSpecifications().then(
-    //   (selectedElementsArray) => {
-    //     console.log(selectedElementsArray);
-    //   }
-    // );
-    let itemSpecs = ["3 UK", "red"];
-    ProductDetailsPage.makeSpecifications(itemSpecs);
-    ProductDetailsPage.getSelectedSpecifications().then((selectionsMade) => {
-      cy.log("SELECTIONS MADE: ");
-      for (let i = 0; i < selectionsMade.length; i++) {
-        cy.log("Index " + i + ": " + selectionsMade[i]);
-      }
-      //cy.log("SELECTIONS MADE: " + selectionsMade);
+    let itemSpecs = ["White", "Medium"];
+    return ProductDetailsPage.makeDefaultSpecifications().then(() => {
+      ProductDetailsPage.getSelectedSpecifications().then((selectionsMade) => {
+        cy.log("SELECTIONS MADE: ");
+        for (let i = 0; i < selectionsMade.length; i++) {
+          cy.log("Index " + i + ": " + selectionsMade[i]);
+        }
+        ProductDetailsPage.doCurrentSpecsMatchDesiredSpecs(itemSpecs).then(
+          (result) => {
+            cy.log("Result: " + result);
+          }
+        );
+      });
     });
+    // return ProductDetailsPage.makeSpecifications(itemSpecs).then(() => {
+    //   ProductDetailsPage.getSelectedSpecifications().then((selectionsMade) => {
+    //     cy.log("SELECTIONS MADE: ");
+    //     for (let i = 0; i < selectionsMade.length; i++) {
+    //       cy.log("Index " + i + ": " + selectionsMade[i]);
+    //     }
+    //     ProductDetailsPage.doCurrentSpecsMatchDesiredSpecs(itemSpecs).then(
+    //       (result) => {
+    //         cy.log("Result: " + result);
+    //       }
+    //     );
+    //   });
+    // });
   }
 );
 

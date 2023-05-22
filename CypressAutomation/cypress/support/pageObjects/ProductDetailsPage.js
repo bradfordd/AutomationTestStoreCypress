@@ -12,6 +12,20 @@ export class ProductDetailsPage {
   static productInfoPath = ".productinfo li";
   static productSpecifications = ".col-sm-10";
 
+  static doCurrentSpecsMatchDesiredSpecs(desiredSpecs) {
+    return this.getSelectedSpecifications().then((selectedSpecs) => {
+      if (desiredSpecs.length != selectedSpecs.length) {
+        return false;
+      }
+      for (let i = 0; i < desiredSpecs.length; i++) {
+        debugger;
+        if (!selectedSpecs[i].includes(desiredSpecs[i])) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }
   static getSelectedSpecifications() {
     let selectedElementsArray = [];
     return cy
@@ -25,26 +39,19 @@ export class ProductDetailsPage {
               cy.wrap($currButton)
                 .parent("label")
                 .then(($label) => {
-                  const text = $label.text();
-                  cy.log("Element " + radioIndex + ":");
-                  cy.log(text);
+                  const text = $label.text().trim();
                   selectedElementsArray.push(text);
                 });
             });
         } else if ($specEl.find("select").length) {
-          cy.log("DROPDOWN BAR FOUND");
           cy.wrap($specEl)
-            .find("option[selected]")
+            .find("option:selected")
             .each(($selectionMade) => {
-              const text = $selectionMade.text();
-              cy.log("SelectionMade: " + text);
+              const text = $selectionMade.text().trim();
               selectedElementsArray.push(text);
             });
-          // return this.getDropdownSelectedElement($jqueryEl).then(
-          //   (dropdownVal) => {
-          //     selectedElementsArray.push(dropdownVal);
-          //   }
-          // );
+        } else {
+          selectedElementsArray.push("No Selection Made");
         }
       })
       .then(() => {
@@ -92,7 +99,8 @@ export class ProductDetailsPage {
 
   // The main function
   static makeSpecifications(specs) {
-    cy.get(this.productSpecifications)
+    return cy
+      .get(this.productSpecifications)
       .should("have.length", specs.length)
       .each(($el, index) => {
         if ($el.find("input[type=radio]").length) {
@@ -102,8 +110,41 @@ export class ProductDetailsPage {
             .each(($label) => {
               this.checkSpecAndFetchRadioButton($label, specs[index]);
             });
+        } else if ($el.find("select").length) {
+          cy.wrap($el)
+            .find("select")
+            .first()
+            .find("option:contains(" + specs[index] + ")")
+            .then(($option) => {
+              cy.wrap($el).find("select").first().select($option.val());
+            });
         }
       });
+  }
+
+  static makeDefaultSpecifications() {
+    return cy.get(this.productSpecifications).then(($els) => {
+      cy.wrap($els).each(($el) => {
+        if ($el.find("input[type=radio]").length) {
+          // Find the associated label
+          cy.wrap($el)
+            .find("input[type=radio]")
+            .first()
+            .then(($button) => {
+              cy.wrap($button).check();
+            });
+        } else if ($el.find("select").length) {
+          cy.wrap($el)
+            .find("select")
+            .first()
+            .find("option:enabled")
+            .first()
+            .then(($option) => {
+              cy.wrap($el).find("select").first().select($option.val());
+            });
+        }
+      });
+    });
   }
 
   static getRadioButtonSelectedElement($jqueryEl) {
