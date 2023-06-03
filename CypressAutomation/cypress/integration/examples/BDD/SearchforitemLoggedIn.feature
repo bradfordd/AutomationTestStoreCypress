@@ -21,7 +21,7 @@ Feature: Search for a Item and selects an item they want
     | Shampoo    |
     | Conditioner|
     | Mascara    |
-        
+  @CartTest   
   Scenario Outline: User searches for item, adds item to cart, then checks out
     Given User Searches For "<item>", then selects first item on search results page
     And User makes purchase specifications if necessary, adds item to cart and proceeds to checkout

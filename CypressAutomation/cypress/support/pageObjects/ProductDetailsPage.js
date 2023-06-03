@@ -1,4 +1,5 @@
 // support/pageObjects/ProductDetailsPage.js
+import { CartProduct } from "../models/CartProduct";
 
 export class ProductDetailsPage {
   // Selectors
@@ -11,14 +12,86 @@ export class ProductDetailsPage {
   static removeFromWishListPath = "a.wishlist_remove";
   static productInfoPath = ".productinfo li";
   static productSpecifications = ".col-sm-10";
+  static productQuantity = "#product_quantity";
+  static totalPricePath = "span.total-price";
 
+  static getTotalPrice() {
+    cy.get(this.totalPricePath)
+      .invoke("text")
+      .should("not.be.empty")
+      .and("match", /\$/);
+    return cy.get(this.totalPricePath);
+  }
+
+  static getCartProductObjectFromProductDetails() {
+    let productName;
+    let selectedSpecs;
+    let modelNumber;
+    let productPrice;
+    let productQuantity;
+    let totalPrice;
+
+    this.getProductName()
+      .invoke("text")
+      .then((value) => {
+        productName = value;
+      });
+
+    this.getSelectedSpecifications().then((value) => {
+      selectedSpecs = value;
+    });
+
+    this.getModelNumber().then((value) => {
+      modelNumber = value;
+    });
+
+    this.getProductPrice()
+      //      .invoke("text")
+      .then((value) => {
+        debugger;
+        productPrice = value;
+      });
+
+    this.getProductQuantity()
+      .invoke("attr", "value")
+      .then((value) => {
+        productQuantity = value;
+      });
+    this.getTotalPrice()
+      .invoke("prop", "outerHTML")
+      .then((outerHTML) => {
+        // Log the outer HTML
+        cy.log("outerHTML: " + outerHTML);
+      });
+
+    this.getTotalPrice()
+      .invoke("text")
+      .then((value) => {
+        totalPrice = value;
+        cy.log("Total Price: " + totalPrice);
+      });
+
+    return cy.then(() => {
+      return new CartProduct(
+        productName,
+        selectedSpecs,
+        modelNumber,
+        productPrice,
+        productQuantity,
+        totalPrice
+      );
+    });
+  }
+
+  static getProductQuantity() {
+    return cy.get(this.productQuantity);
+  }
   static doCurrentSpecsMatchDesiredSpecs(desiredSpecs) {
     return this.getSelectedSpecifications().then((selectedSpecs) => {
       if (desiredSpecs.length != selectedSpecs.length) {
         return false;
       }
       for (let i = 0; i < desiredSpecs.length; i++) {
-        debugger;
         if (!selectedSpecs[i].includes(desiredSpecs[i])) {
           return false;
         }
@@ -27,37 +100,45 @@ export class ProductDetailsPage {
     });
   }
   static getSelectedSpecifications() {
-    let selectedElementsArray = [];
-    return cy
-      .get(this.productSpecifications)
-      .each(($specEl, index, $specifications) => {
-        // Convert the Cypress object to a jQuery object
-        if ($specEl.find("input[type=radio]").length) {
-          cy.wrap($specEl)
-            .find("input[type='radio']:checked")
-            .each(($currButton, radioIndex, $radioButtons) => {
-              cy.wrap($currButton)
-                .parent("label")
-                .then(($label) => {
-                  const text = $label.text().trim();
+    return this.hasSpecifications().then((hasSpecifications) => {
+      if (hasSpecifications) {
+        let selectedElementsArray = [];
+        return cy
+          .get(this.productSpecifications)
+          .each(($specEl, index, $specifications) => {
+            // Convert the Cypress object to a jQuery object
+            if ($specEl.find("input[type=radio]").length) {
+              cy.wrap($specEl)
+                .find("input[type='radio']:checked")
+                .each(($currButton, radioIndex, $radioButtons) => {
+                  cy.wrap($currButton)
+                    .parent("label")
+                    .then(($label) => {
+                      const text = $label.text().trim();
+                      selectedElementsArray.push(text);
+                    });
+                });
+            } else if ($specEl.find("select").length) {
+              cy.wrap($specEl)
+                .find("option:selected")
+                .each(($selectionMade) => {
+                  const text = $selectionMade.text().trim();
                   selectedElementsArray.push(text);
                 });
-            });
-        } else if ($specEl.find("select").length) {
-          cy.wrap($specEl)
-            .find("option:selected")
-            .each(($selectionMade) => {
-              const text = $selectionMade.text().trim();
-              selectedElementsArray.push(text);
-            });
-        } else {
-          selectedElementsArray.push("No Selection Made");
-        }
-      })
-      .then(() => {
-        // Use the array here, after all async tasks are done.
-        return cy.wrap(selectedElementsArray);
-      });
+            } else {
+              selectedElementsArray.push("No Selection Made");
+            }
+          })
+          .then(() => {
+            // Use the array here, after all async tasks are done.
+            return cy.wrap(selectedElementsArray);
+          });
+      } else {
+        return cy.wrap(
+          new Array("No Specifications Available for this Product")
+        );
+      }
+    });
   }
 
   // Helper function to check if radio button is disabled
@@ -122,6 +203,24 @@ export class ProductDetailsPage {
       });
   }
 
+  static hasSpecifications() {
+    return cy.document().then((doc) => {
+      const specificationElements = doc.querySelectorAll(
+        this.productSpecifications
+      );
+      return cy.wrap(specificationElements.length > 0);
+    });
+  }
+
+  static areSpecificationsPresent() {
+    return cy.document().then((doc) => {
+      const specificationElements = doc.querySelectorAll(
+        this.productSpecifications
+      );
+      return cy.wrap(specificationElements.length > 0);
+    });
+  }
+
   static makeDefaultSpecifications() {
     return cy.get(this.productSpecifications).then(($els) => {
       cy.wrap($els).each(($el) => {
@@ -166,15 +265,6 @@ export class ProductDetailsPage {
     console.log(outerHTML);
   }
 
-  static areSpecificationsPresent() {
-    return cy.document().then((doc) => {
-      const specificationElements = doc.querySelectorAll(
-        this.productSpecifications
-      );
-      return cy.wrap(specificationElements.length > 0);
-    });
-  }
-
   static getSpecificationSelectors() {
     return cy.get(this.productSpecifications);
   }
@@ -185,11 +275,9 @@ export class ProductDetailsPage {
 
   static getModelNumber() {
     return this.getProductInfo().then(($list) => {
-      let modelNumber;
+      let modelNumber = "";
 
       $list.each((index, el) => {
-        // el is the current element
-        // index is the index of the current element in the list
         const $el = Cypress.$(el);
         if ($el.text().includes("Model:")) {
           modelNumber = $el.text().split(":")[1].trim();
@@ -267,7 +355,24 @@ export class ProductDetailsPage {
   }
 
   static getProductPrice() {
-    return cy.get(ProductDetailsPage.productPrice);
+    let unitPrice = 0.0;
+
+    return new Cypress.Promise((resolve, reject) => {
+      ProductDetailsPage.getSelectedSpecifications()
+        .each((spec, index, specifications) => {
+          const addedCost = this.parsePriceValue(spec);
+          unitPrice += addedCost;
+        })
+        .then(() => {
+          cy.get(ProductDetailsPage.productPrice)
+            .invoke("text")
+            .then((productPriceText) => {
+              const addedCost = this.parsePriceValue(productPriceText);
+              unitPrice += addedCost;
+              resolve(unitPrice);
+            });
+        });
+    });
   }
 
   static getAddToCartButton() {
@@ -275,6 +380,15 @@ export class ProductDetailsPage {
   }
   static clickAddToCartButton() {
     return cy.get(ProductDetailsPage.addToCartButton).click();
+  }
+
+  static parsePriceValue(inputString) {
+    const regex = /\$(\d+\.\d+)/;
+    const match = regex.exec(inputString);
+    if (match) {
+      return parseFloat(match[1]);
+    }
+    return 0.0;
   }
 
   static getProductDescription() {

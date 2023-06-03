@@ -1,4 +1,9 @@
-import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+import {
+  Given,
+  When,
+  Then,
+  Before,
+} from "@badeball/cypress-cucumber-preprocessor";
 import { HomePage } from "../../../../support/pageObjects/HomePage";
 import { SearchBar } from "../../../../support/pageObjects/SearchBar";
 import { SearchResultsPage } from "../../../../support/pageObjects/SearchResultsPage";
@@ -8,6 +13,7 @@ import { LoginPage } from "../../../../support/pageObjects/LoginPage";
 import { ProductSpecifications } from "../../../../support/pageObjects/ProductSpecifications";
 import { ShoppingCartPage } from "../../../../support/pageObjects/ShoppingCartPage";
 import { CheckoutConfirmation } from "../../../../support/pageObjects/CheckoutConfirmation";
+import { cartCleanup } from "../../../../support/cleanup/cartCleanup";
 import { OrderProcessConfirmationPage } from "../../../../support/pageObjects/OrderProcessConfirmationPage";
 
 var currProductTitle = "";
@@ -86,4 +92,15 @@ Then(
 Then("Checkout confirmation page displays", () => {
   CheckoutConfirmation.clickConfirmOrderButton();
   OrderProcessConfirmationPage.clickContinueButton();
+});
+
+Before({ tags: "@CartTest" }, () => {
+  cy.clearCookies();
+  HomePage.visitHomePage();
+  LoginOrRegisterButton.clickButton();
+  cy.fixture("johndoe").then(function (data) {
+    this.data = data;
+    LoginPage.login(this.data.loginname, this.data.password);
+  });
+  cartCleanup();
 });
