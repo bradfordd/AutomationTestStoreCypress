@@ -45,7 +45,7 @@ To run the tests in the interactive Test Runner mode, use the following command:
 npm run test
 ```
 
-To run the tests in headless mode, use the following command:
+To run the tests in headed mode, use the following command:
 
 ```
 npm run headTest
